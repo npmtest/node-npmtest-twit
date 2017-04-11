@@ -1,0 +1,1307 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for node-npmtest-twit/twit/lib/streaming-api-connection.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-twit">npmtest-twit (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-twit/twit/lib/streaming-api-connection.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">10.9% <small>(23 / 211)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">0% <small>(0 / 100)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">0% <small>(0 / 28)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">12.64% <small>(23 / 182)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../index.html">All files</a> &#187; <a href="index.html">node-npmtest-twit/twit/lib/</a> &#187; streaming-api-connection.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&nbsp;
+var EventEmitter = require('events').EventEmitter;
+var util = require('util');
+&nbsp;
+var helpers = require('./helpers')
+var Parser = require('./parser');
+var request = require('request');
+var zlib = require('zlib');
+&nbsp;
+var STATUS_CODES_TO_ABORT_ON = require('./settings').STATUS_CODES_TO_ABORT_ON
+&nbsp;
+var StreamingAPIConnection = <span class="fstat-no" title="function not covered" >function (reqOpts, twitOptions) {</span>
+<span class="cstat-no" title="statement not covered" >  this.reqOpts = reqOpts</span>
+<span class="cstat-no" title="statement not covered" >  this.twitOptions = twitOptions</span>
+<span class="cstat-no" title="statement not covered" >  this._twitter_time_minus_local_time_ms = 0</span>
+<span class="cstat-no" title="statement not covered" >  EventEmitter.call(this)</span>
+}
+&nbsp;
+util.inherits(StreamingAPIConnection, EventEmitter)
+&nbsp;
+/**
+ * Resets the connection.
+ * - clears request, response, parser
+ * - removes scheduled reconnect handle (if one was scheduled)
+ * - stops the stall abort timeout handle (if one was scheduled)
+ */
+StreamingAPIConnection.prototype._resetConnection = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >  if (this.request) {</span>
+    // clear our reference to the `request` instance
+<span class="cstat-no" title="statement not covered" >    this.request.removeAllListeners();</span>
+<span class="cstat-no" title="statement not covered" >    this.request.destroy();</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (this.response) {</span>
+    // clear our reference to the http.IncomingMessage instance
+<span class="cstat-no" title="statement not covered" >    this.response.removeAllListeners();</span>
+<span class="cstat-no" title="statement not covered" >    this.response.destroy();</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (this.parser) {</span>
+<span class="cstat-no" title="statement not covered" >    this.parser.removeAllListeners()</span>
+  }
+&nbsp;
+  // ensure a scheduled reconnect does not occur (if one was scheduled)
+  // this can happen if we get a close event before .stop() is called
+<span class="cstat-no" title="statement not covered" >  clearTimeout(this._scheduledReconnect)</span>
+<span class="cstat-no" title="statement not covered" >  delete this._scheduledReconnect</span>
+&nbsp;
+  // clear our stall abort timeout
+<span class="cstat-no" title="statement not covered" >  this._stopStallAbortTimeout()</span>
+}
+&nbsp;
+/**
+ * Resets the parameters used in determining the next reconnect time
+ */
+StreamingAPIConnection.prototype._resetRetryParams = <span class="fstat-no" title="function not covered" >function () {</span>
+  // delay for next reconnection attempt
+<span class="cstat-no" title="statement not covered" >  this._connectInterval = 0</span>
+  // flag indicating whether we used a 0-delay reconnect
+<span class="cstat-no" title="statement not covered" >  this._usedFirstReconnect = false</span>
+}
+&nbsp;
+StreamingAPIConnection.prototype._startPersistentConnection = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >  var self = this;</span>
+<span class="cstat-no" title="statement not covered" >  self._resetConnection();</span>
+<span class="cstat-no" title="statement not covered" >  self._setupParser();</span>
+<span class="cstat-no" title="statement not covered" >  self._resetStallAbortTimeout();</span>
+<span class="cstat-no" title="statement not covered" >  self._setOauthTimestamp();</span>
+<span class="cstat-no" title="statement not covered" >  self.request = request.post(this.reqOpts);</span>
+<span class="cstat-no" title="statement not covered" >  self.emit('connect', self.request);</span>
+<span class="cstat-no" title="statement not covered" >  self.request.on('response', <span class="fstat-no" title="function not covered" >function (response) {</span></span>
+<span class="cstat-no" title="statement not covered" >    self._updateOauthTimestampOffsetFromResponse(response)</span>
+    // reset our reconnection attempt flag so next attempt goes through with 0 delay
+    // if we get a transport-level error
+<span class="cstat-no" title="statement not covered" >    self._usedFirstReconnect = false;</span>
+    // start a stall abort timeout handle
+<span class="cstat-no" title="statement not covered" >    self._resetStallAbortTimeout();</span>
+<span class="cstat-no" title="statement not covered" >    self.response = response</span>
+<span class="cstat-no" title="statement not covered" >    if (STATUS_CODES_TO_ABORT_ON.indexOf(self.response.statusCode) !== -1) {</span>
+      // We got a status code telling us we should abort the connection.
+      // Read the body from the response and return an error to the user.
+<span class="cstat-no" title="statement not covered" >      var body = '';</span>
+<span class="cstat-no" title="statement not covered" >      var compressedBody = '';</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      self.response.on('data', <span class="fstat-no" title="function not covered" >function (chunk) {</span></span>
+<span class="cstat-no" title="statement not covered" >        compressedBody += chunk.toString('utf8');</span>
+      })
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      var gunzip = zlib.createGunzip();</span>
+<span class="cstat-no" title="statement not covered" >      self.response.pipe(gunzip);</span>
+<span class="cstat-no" title="statement not covered" >      gunzip.on('data', <span class="fstat-no" title="function not covered" >function (chunk) {</span></span>
+<span class="cstat-no" title="statement not covered" >        body += chunk.toString('utf8')</span>
+      })
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      gunzip.on('end', <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >        try {</span>
+<span class="cstat-no" title="statement not covered" >          body = JSON.parse(body)</span>
+        } catch (jsonDecodeError) {
+          // Twitter may send an HTML body
+          // if non-JSON text was returned, we'll just attach it to the error as-is
+        }
+        // surface the error to the user
+<span class="cstat-no" title="statement not covered" >        var error = helpers.makeTwitError('Bad Twitter streaming request: ' + self.response.statusCode)</span>
+<span class="cstat-no" title="statement not covered" >        error.statusCode = response ? response.statusCode: null;</span>
+<span class="cstat-no" title="statement not covered" >        helpers.attachBodyInfoToError(error, body)</span>
+<span class="cstat-no" title="statement not covered" >        self.emit('error', error);</span>
+        // stop the stream explicitly so we don't reconnect
+<span class="cstat-no" title="statement not covered" >        self.stop()</span>
+<span class="cstat-no" title="statement not covered" >        body = null;</span>
+      });
+<span class="cstat-no" title="statement not covered" >      gunzip.on('error', <span class="fstat-no" title="function not covered" >function (err) {</span></span>
+        // If Twitter sends us back an uncompressed HTTP response, gzip will error out.
+        // Handle this by emitting an error with the uncompressed response body.
+<span class="cstat-no" title="statement not covered" >        var errMsg = 'Gzip error: ' + err.message;</span>
+<span class="cstat-no" title="statement not covered" >        var twitErr = helpers.makeTwitError(errMsg);</span>
+<span class="cstat-no" title="statement not covered" >        twitErr.statusCode = self.response.statusCode;</span>
+<span class="cstat-no" title="statement not covered" >        helpers.attachBodyInfoToError(twitErr, compressedBody);</span>
+<span class="cstat-no" title="statement not covered" >        self.emit('parser-error', twitErr);</span>
+      });
+    } else <span class="cstat-no" title="statement not covered" >if (self.response.statusCode === 420) {</span>
+      // close the connection forcibly so a reconnect is scheduled by `self.onClose()`
+<span class="cstat-no" title="statement not covered" >      self._scheduleReconnect();</span>
+    } else {
+      // We got an OK status code - the response should be valid.
+      // Read the body from the response and return to the user.
+<span class="cstat-no" title="statement not covered" >      var gunzip = zlib.createGunzip();</span>
+<span class="cstat-no" title="statement not covered" >      self.response.pipe(gunzip);</span>
+&nbsp;
+      //pass all response data to parser
+<span class="cstat-no" title="statement not covered" >      gunzip.on('data', <span class="fstat-no" title="function not covered" >function (chunk) {</span></span>
+<span class="cstat-no" title="statement not covered" >        self._connectInterval = 0</span>
+        // stop stall timer, and start a new one
+<span class="cstat-no" title="statement not covered" >        self._resetStallAbortTimeout();</span>
+<span class="cstat-no" title="statement not covered" >        self.parser.parse(chunk.toString('utf8'));</span>
+      });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      gunzip.on('close', self._onClose.bind(self))</span>
+<span class="cstat-no" title="statement not covered" >      gunzip.on('error', <span class="fstat-no" title="function not covered" >function (err) {</span></span>
+<span class="cstat-no" title="statement not covered" >        self.emit('error', err);</span>
+      })
+<span class="cstat-no" title="statement not covered" >      self.response.on('error', <span class="fstat-no" title="function not covered" >function (err) {</span></span>
+        // expose response errors on twit instance
+<span class="cstat-no" title="statement not covered" >        self.emit('error', err);</span>
+      })
+&nbsp;
+      // connected without an error response from Twitter, emit `connected` event
+      // this must be emitted after all its event handlers are bound
+      // so the reference to `self.response` is not interfered-with by the user until it is emitted
+<span class="cstat-no" title="statement not covered" >      self.emit('connected', self.response);</span>
+    }
+  });
+<span class="cstat-no" title="statement not covered" >  self.request.on('close', self._onClose.bind(self));</span>
+<span class="cstat-no" title="statement not covered" >  self.request.on('error', <span class="fstat-no" title="function not covered" >function (err) {</span> <span class="cstat-no" title="statement not covered" >self._scheduleReconnect.bind(self) }</span>);</span>
+<span class="cstat-no" title="statement not covered" >  return self;</span>
+}
+&nbsp;
+/**
+ * Handle when the request or response closes.
+ * Schedule a reconnect according to Twitter's reconnect guidelines
+ *
+ */
+StreamingAPIConnection.prototype._onClose = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >  var self = this;</span>
+<span class="cstat-no" title="statement not covered" >  self._stopStallAbortTimeout();</span>
+<span class="cstat-no" title="statement not covered" >  if (self._scheduledReconnect) {</span>
+    // if we already have a reconnect scheduled, don't schedule another one.
+    // this race condition can happen if the http.ClientRequest and http.IncomingMessage both emit `close`
+<span class="cstat-no" title="statement not covered" >    return</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  self._scheduleReconnect();</span>
+}
+&nbsp;
+/**
+ * Kick off the http request, and persist the connection
+ *
+ */
+StreamingAPIConnection.prototype.start = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >  this._resetRetryParams();</span>
+<span class="cstat-no" title="statement not covered" >  this._startPersistentConnection();</span>
+<span class="cstat-no" title="statement not covered" >  return this;</span>
+}
+&nbsp;
+/**
+ * Abort the http request, stop scheduled reconnect (if one was scheduled) and clear state
+ *
+ */
+StreamingAPIConnection.prototype.stop = <span class="fstat-no" title="function not covered" >function () {</span>
+  // clear connection variables and timeout handles
+<span class="cstat-no" title="statement not covered" >  this._resetConnection();</span>
+<span class="cstat-no" title="statement not covered" >  this._resetRetryParams();</span>
+<span class="cstat-no" title="statement not covered" >  return this;</span>
+}
+&nbsp;
+/**
+ * Stop and restart the stall abort timer (called when new data is received)
+ *
+ * If we go 90s without receiving data from twitter, we abort the request &amp; reconnect.
+ */
+StreamingAPIConnection.prototype._resetStallAbortTimeout = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >  var self = this;</span>
+  // stop the previous stall abort timer
+<span class="cstat-no" title="statement not covered" >  self._stopStallAbortTimeout();</span>
+  //start a new 90s timeout to trigger a close &amp; reconnect if no data received
+<span class="cstat-no" title="statement not covered" >  self._stallAbortTimeout = setTimeout(<span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >    self._scheduleReconnect()</span>
+  }, 90000);
+<span class="cstat-no" title="statement not covered" >  return this;</span>
+}
+&nbsp;
+/**
+ * Stop stall timeout
+ *
+ */
+StreamingAPIConnection.prototype._stopStallAbortTimeout = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >  clearTimeout(this._stallAbortTimeout);</span>
+  // mark the timer as `null` so it is clear via introspection that the timeout is not scheduled
+<span class="cstat-no" title="statement not covered" >  delete this._stallAbortTimeout;</span>
+<span class="cstat-no" title="statement not covered" >  return this;</span>
+}
+&nbsp;
+/**
+ * Computes the next time a reconnect should occur (based on the last HTTP response received)
+ * and starts a timeout handle to begin reconnecting after `self._connectInterval` passes.
+ *
+ * @return {Undefined}
+ */
+StreamingAPIConnection.prototype._scheduleReconnect = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >  var self = this;</span>
+<span class="cstat-no" title="statement not covered" >  if (self.response &amp;&amp; self.response.statusCode === 420) {</span>
+    // we are being rate limited
+    // start with a 1 minute wait and double each attempt
+<span class="cstat-no" title="statement not covered" >    if (!self._connectInterval) {</span>
+<span class="cstat-no" title="statement not covered" >      self._connectInterval = 60000;</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      self._connectInterval *= 2;</span>
+    }
+  } else <span class="cstat-no" title="statement not covered" >if (self.response &amp;&amp; String(self.response.statusCode).charAt(0) === '5') {</span>
+    // twitter 5xx errors
+    // start with a 5s wait, double each attempt up to 320s
+<span class="cstat-no" title="statement not covered" >    if (!self._connectInterval) {</span>
+<span class="cstat-no" title="statement not covered" >      self._connectInterval = 5000;</span>
+    } else <span class="cstat-no" title="statement not covered" >if (self._connectInterval &lt; 320000) {</span>
+<span class="cstat-no" title="statement not covered" >      self._connectInterval *= 2;</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      self._connectInterval = 320000;</span>
+    }
+  } else {
+    // we did not get an HTTP response from our last connection attempt.
+    // DNS/TCP error, or a stall in the stream (and stall timer closed the connection)
+<span class="cstat-no" title="statement not covered" >    if (!self._usedFirstReconnect) {</span>
+      // first reconnection attempt on a valid connection should occur immediately
+<span class="cstat-no" title="statement not covered" >      self._connectInterval = 0;</span>
+<span class="cstat-no" title="statement not covered" >      self._usedFirstReconnect = true;</span>
+    } else <span class="cstat-no" title="statement not covered" >if (self._connectInterval &lt; 16000) {</span>
+      // linearly increase delay by 250ms up to 16s
+<span class="cstat-no" title="statement not covered" >      self._connectInterval += 250;</span>
+    } else {
+      // cap out reconnect interval at 16s
+<span class="cstat-no" title="statement not covered" >      self._connectInterval = 16000;</span>
+    }
+  }
+&nbsp;
+  // schedule the reconnect
+<span class="cstat-no" title="statement not covered" >  self._scheduledReconnect = setTimeout(<span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >    self._startPersistentConnection();</span>
+  }, self._connectInterval);
+<span class="cstat-no" title="statement not covered" >  self.emit('reconnect', self.request, self.response, self._connectInterval);</span>
+}
+&nbsp;
+StreamingAPIConnection.prototype._setupParser = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >  var self = this</span>
+<span class="cstat-no" title="statement not covered" >  self.parser = new Parser()</span>
+&nbsp;
+  // handle twitter objects as they come in - emit the generic `message` event
+  // along with the specific event corresponding to the message
+<span class="cstat-no" title="statement not covered" >  self.parser.on('element', <span class="fstat-no" title="function not covered" >function (msg) {</span></span>
+<span class="cstat-no" title="statement not covered" >    self.emit('message', msg)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if      (msg.delete)          { <span class="cstat-no" title="statement not covered" >self.emit('delete', msg) }</span></span>
+    else <span class="cstat-no" title="statement not covered" >if (msg.disconnect)      { <span class="cstat-no" title="statement not covered" >self._handleDisconnect(msg) }</span></span>
+    else <span class="cstat-no" title="statement not covered" >if (msg.limit)           { <span class="cstat-no" title="statement not covered" >self.emit('limit', msg) }</span></span>
+    else <span class="cstat-no" title="statement not covered" >if (msg.scrub_geo)       { <span class="cstat-no" title="statement not covered" >self.emit('scrub_geo', msg) }</span></span>
+    else <span class="cstat-no" title="statement not covered" >if (msg.warning)         { <span class="cstat-no" title="statement not covered" >self.emit('warning', msg) }</span></span>
+    else <span class="cstat-no" title="statement not covered" >if (msg.status_withheld) { <span class="cstat-no" title="statement not covered" >self.emit('status_withheld', msg) }</span></span>
+    else <span class="cstat-no" title="statement not covered" >if (msg.user_withheld)   { <span class="cstat-no" title="statement not covered" >self.emit('user_withheld', msg) }</span></span>
+    else <span class="cstat-no" title="statement not covered" >if (msg.friends || msg.friends_str) { <span class="cstat-no" title="statement not covered" >self.emit('friends', msg) }</span></span>
+    else <span class="cstat-no" title="statement not covered" >if (msg.direct_message)  { <span class="cstat-no" title="statement not covered" >self.emit('direct_message', msg) }</span></span>
+    else <span class="cstat-no" title="statement not covered" >if (msg.event)           {</span>
+<span class="cstat-no" title="statement not covered" >      self.emit('user_event', msg)</span>
+      // reference: https://dev.twitter.com/docs/streaming-apis/messages#User_stream_messages
+<span class="cstat-no" title="statement not covered" >      var ev = msg.event</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if      (ev === 'blocked')                { <span class="cstat-no" title="statement not covered" >self.emit('blocked', msg) }</span></span>
+      else <span class="cstat-no" title="statement not covered" >if (ev === 'unblocked')              { <span class="cstat-no" title="statement not covered" >self.emit('unblocked', msg) }</span></span>
+      else <span class="cstat-no" title="statement not covered" >if (ev === 'favorite')               { <span class="cstat-no" title="statement not covered" >self.emit('favorite', msg) }</span></span>
+      else <span class="cstat-no" title="statement not covered" >if (ev === 'unfavorite')             { <span class="cstat-no" title="statement not covered" >self.emit('unfavorite', msg) }</span></span>
+      else <span class="cstat-no" title="statement not covered" >if (ev === 'follow')                 { <span class="cstat-no" title="statement not covered" >self.emit('follow', msg) }</span></span>
+      else <span class="cstat-no" title="statement not covered" >if (ev === 'unfollow')               { <span class="cstat-no" title="statement not covered" >self.emit('unfollow', msg) }</span></span>
+      else <span class="cstat-no" title="statement not covered" >if (ev === 'mute')                   { <span class="cstat-no" title="statement not covered" >self.emit('mute', msg) }</span></span>
+      else <span class="cstat-no" title="statement not covered" >if (ev === 'unmute')                 { <span class="cstat-no" title="statement not covered" >self.emit('unmute', msg) }</span></span>
+      else <span class="cstat-no" title="statement not covered" >if (ev === 'user_update')            { <span class="cstat-no" title="statement not covered" >self.emit('user_update', msg) }</span></span>
+      else <span class="cstat-no" title="statement not covered" >if (ev === 'list_created')           { <span class="cstat-no" title="statement not covered" >self.emit('list_created', msg) }</span></span>
+      else <span class="cstat-no" title="statement not covered" >if (ev === 'list_destroyed')         { <span class="cstat-no" title="statement not covered" >self.emit('list_destroyed', msg) }</span></span>
+      else <span class="cstat-no" title="statement not covered" >if (ev === 'list_updated')           { <span class="cstat-no" title="statement not covered" >self.emit('list_updated', msg) }</span></span>
+      else <span class="cstat-no" title="statement not covered" >if (ev === 'list_member_added')      { <span class="cstat-no" title="statement not covered" >self.emit('list_member_added', msg) }</span></span>
+      else <span class="cstat-no" title="statement not covered" >if (ev === 'list_member_removed')    { <span class="cstat-no" title="statement not covered" >self.emit('list_member_removed', msg) }</span></span>
+      else <span class="cstat-no" title="statement not covered" >if (ev === 'list_user_subscribed')   { <span class="cstat-no" title="statement not covered" >self.emit('list_user_subscribed', msg) }</span></span>
+      else <span class="cstat-no" title="statement not covered" >if (ev === 'list_user_unsubscribed') { <span class="cstat-no" title="statement not covered" >self.emit('list_user_unsubscribed', msg) }</span></span>
+      else <span class="cstat-no" title="statement not covered" >if (ev === 'quoted_tweet')           { <span class="cstat-no" title="statement not covered" >self.emit('quoted_tweet', msg) }</span></span>
+      else <span class="cstat-no" title="statement not covered" >if (ev === 'favorited_retweet')      { <span class="cstat-no" title="statement not covered" >self.emit('favorited_retweet', msg) }</span></span>
+      else <span class="cstat-no" title="statement not covered" >if (ev === 'retweeted_retweet')      { <span class="cstat-no" title="statement not covered" >self.emit('retweeted_retweet', msg) }</span></span>
+      else                                      { <span class="cstat-no" title="statement not covered" >self.emit('unknown_user_event', msg) }</span>
+    } else                                      { <span class="cstat-no" title="statement not covered" >self.emit('tweet', msg) }</span>
+  })
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  self.parser.on('error', <span class="fstat-no" title="function not covered" >function (err) {</span></span>
+<span class="cstat-no" title="statement not covered" >    self.emit('parser-error', err)</span>
+  });
+<span class="cstat-no" title="statement not covered" >  self.parser.on('connection-limit-exceeded', <span class="fstat-no" title="function not covered" >function (err) {</span></span>
+<span class="cstat-no" title="statement not covered" >    self.emit('error', err);</span>
+  })
+}
+&nbsp;
+StreamingAPIConnection.prototype._handleDisconnect = <span class="fstat-no" title="function not covered" >function (twitterMsg) {</span>
+<span class="cstat-no" title="statement not covered" >  this.emit('disconnect', twitterMsg);</span>
+<span class="cstat-no" title="statement not covered" >  this.stop();</span>
+}
+&nbsp;
+/**
+ * Call whenever an http request is about to be made to update
+ * our local timestamp (used for Oauth) to be Twitter's server time.
+ *
+ */
+StreamingAPIConnection.prototype._setOauthTimestamp = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >  var self = this;</span>
+<span class="cstat-no" title="statement not covered" >  if (self.reqOpts.oauth) {</span>
+<span class="cstat-no" title="statement not covered" >    var oauth_ts = Date.now() + self._twitter_time_minus_local_time_ms;</span>
+<span class="cstat-no" title="statement not covered" >    self.reqOpts.oauth.timestamp = Math.floor(oauth_ts/1000).toString();</span>
+  }
+}
+&nbsp;
+/**
+ * Call whenever an http response is received from Twitter,
+ * to set our local timestamp offset from Twitter's server time.
+ * This is used to set the Oauth timestamp for our next http request
+ * to Twitter (by calling _setOauthTimestamp).
+ *
+ * @param  {http.IncomingResponse} resp   http response received from Twitter.
+ */
+StreamingAPIConnection.prototype._updateOauthTimestampOffsetFromResponse = <span class="fstat-no" title="function not covered" >function (resp) {</span>
+<span class="cstat-no" title="statement not covered" >  if (resp &amp;&amp; resp.headers &amp;&amp; resp.headers.date &amp;&amp;</span>
+      new Date(resp.headers.date).toString() !== 'Invalid Date'
+  ) {
+<span class="cstat-no" title="statement not covered" >    var twitterTimeMs = new Date(resp.headers.date).getTime()</span>
+<span class="cstat-no" title="statement not covered" >    this._twitter_time_minus_local_time_ms = twitterTimeMs - Date.now();</span>
+  }
+}
+&nbsp;
+module.exports = StreamingAPIConnection
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Tue Apr 11 2017 09:29:21 GMT+0000 (UTC)</div>
+</div>
+</body>
+</html>
