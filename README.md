@@ -1,4 +1,7 @@
-# test coverage for  [twit (v2.2.5)](https://github.com/ttezel/twit)  [![npm package](https://img.shields.io/npm/v/npmtest-twit.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-twit) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-twit.svg)](https://travis-ci.org/npmtest/node-npmtest-twit)
+# npmtest-twit
+
+#### basic test coverage for  [twit (v2.2.5)](https://github.com/ttezel/twit)  [![npm package](https://img.shields.io/npm/v/npmtest-twit.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-twit) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-twit.svg)](https://travis-ci.org/npmtest/node-npmtest-twit)
+
 #### Twitter API client for node (REST & Streaming)
 
 [![NPM](https://nodei.co/npm/twit.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/twit)
@@ -86,7 +89,8 @@
     "scripts": {
         "test": "mocha tests/* -t 70000 -R spec --bail --globals domain,_events,_maxListeners"
     },
-    "version": "2.2.5"
+    "version": "2.2.5",
+    "bin": {}
 }
 ```
 
